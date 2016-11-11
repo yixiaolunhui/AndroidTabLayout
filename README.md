@@ -3,7 +3,7 @@ App switch tab control, the code to load the network image using the open source
 
 #Effect
 
-![image](https://github.com/dalong982242260/AndroidTabLayout/blob/master/img/hortab.gif?raw=true)![image](https://github.com/dalong982242260/AndroidTabLayout/blob/master/img/vertab.gif?raw=true)
+![image](https://github.com/dalong982242260/AndroidTabLayout/blob/master/img/hortab.gif?raw=true)    ![image](https://github.com/dalong982242260/AndroidTabLayout/blob/master/img/vertab.gif?raw=true)
 
 #
         1、Dynamic set tab, convenient and easy to use
