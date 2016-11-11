@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.dalong.tablayout.TabLayout
+        android:id="@+id/horizontal_bottomtab"
+        android:layout_width="56dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"/>
+
+
+    <View
+        android:id="@+id/driver"
+        android:background="#dedede"
+        android:layout_width="1px"
+        android:layout_alignParentBottom="true"
+        android:layout_height="match_parent"/>
+
+    <com.dalong.androidtablayout.view.VerticalViewPager
+        android:id="@+id/vertical_viewpager"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>

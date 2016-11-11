@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/onLocalIcon"
+        android:text="使用本地图片"
+        android:textSize="20sp"
+        android:padding="30dp"
+        android:onClick="onLocalIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/onNetIcon"
+        android:text="使用网络图片"
+        android:onClick="onNetIcon"
+        android:padding="30dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/onTabNum"
+        android:text="设置小红点"
+        android:onClick="onTabNum"
+        android:padding="30dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/onClearTabNum"
+        android:text="清除小红点"
+        android:padding="30dp"
+        android:textSize="20sp"
+        android:onClick="onClearTabNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
