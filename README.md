@@ -13,6 +13,12 @@ App switch tab control, the code to load the network image using the open source
 
 #use
 
+ gradle：
+ 
+                 dependencies {
+                      compile 'com.dalong:tablayout:1.0.0'
+                 }
+
  xml：
  
                 <com.dalong.tablayout.TabLayout
