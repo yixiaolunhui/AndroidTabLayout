@@ -5,7 +5,7 @@ App switch tab control, the code to load the network image using the open source
 
 ![image](https://github.com/dalong982242260/AndroidTabLayout/blob/master/img/hortab.gif?raw=true)            ![image](https://github.com/dalong982242260/AndroidTabLayout/blob/master/img/vertab.gif?raw=true)
 
-#
+#strengths
         1、Dynamic set tab, convenient and easy to use
         2、Can load the network Icon
         3、Supports setting the number of messages to clear the number of messages.
