@@ -108,7 +108,6 @@ public class VerticalTabActivity extends AppCompatActivity {
                 Log.v(TAG, "您已经选择了"+position);
             }
         });
-
         mTabLayout.setOnSetTabIconListener(new TabLayout.OnSetTabNetworkIconListener() {
             @Override
             public void setTabNetworkIcon(ImageView mTabIcon, int defaultIcon, String iconUrl, int position, boolean isSelect) {
