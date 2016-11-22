@@ -1,5 +1,6 @@
 package com.dalong.tablayout;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -10,9 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +43,8 @@ public class TabLayout extends LinearLayout {
     private OnTabChangeListener mOnTabChangeListener;
     //viewpager
     private ViewPager viewPager;
+    //显示隐藏动画的时间值
+    private int scrollDuration=500;
 
     public TabLayout(Context context) {
         this(context,null);
@@ -61,8 +61,8 @@ public class TabLayout extends LinearLayout {
     }
 
     private void init() {
-
     }
+
 
     /**
      * 设置tab数据
@@ -149,11 +149,18 @@ public class TabLayout extends LinearLayout {
         if(TextUtils.isEmpty(tabUnSelectUrl)||TextUtils.isEmpty(tabSelectUrl)){
             mTabIcon.setImageResource(tabUnSelectIcon);
         }else{
-            Glide.with(mContext)
-                    .load(tabUnSelectUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(tabUnSelectIcon)//使用本地对应的图片作为默认加载图片
-                    .into(mTabIcon);
+//            Glide.with(mContext)
+//                    .load(tabUnSelectUrl)
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .placeholder(tabUnSelectIcon)//使用本地对应的图片作为默认加载图片
+//                    .into(mTabIcon);
+            if(mOnSetTabNetworkIconListener!=null){
+                mOnSetTabNetworkIconListener.setTabNetworkIcon(mTabIcon,
+                        tabUnSelectIcon,
+                        tabUnSelectUrl,
+                        index,
+                        false);
+            }
         }
 
         //设置tab点击事件 其中多加了一个重复点击的回调 为了有的需求是点击多次也要刷新的奇葩需求  比如我们
@@ -223,6 +230,48 @@ public class TabLayout extends LinearLayout {
         updateTabState(currentTab);
     }
 
+    /**
+     * 获取当前选中的tab的下标
+     * @return
+     */
+    public int  getCurrentTab(){
+        return currentTab;
+    }
+
+    /**
+     * 隐藏tab
+     */
+    public void hideTab() {
+        if(getOrientation()==HORIZONTAL){
+            smoothScroll(this,getMeasuredHeight(),scrollDuration,"translationY");
+        }else{
+            smoothScroll(this,-getMeasuredWidth(),scrollDuration,"translationX");
+        }
+
+    }
+
+    /**
+     * 显示tab
+     */
+    public void showTab(){
+        if(getOrientation()==HORIZONTAL){
+            smoothScroll(this,0,scrollDuration,"translationY");
+        }else{
+            smoothScroll(this,0,scrollDuration,"translationX");
+        }
+
+    }
+    /**
+     * 显示隐藏动画
+     * @param target
+     * @param delta
+     * @param duration
+     */
+    private void smoothScroll(Object target, float delta,int duration,String trans) {
+        ObjectAnimator objectAnimator=ObjectAnimator.ofFloat(target,trans,delta);
+        objectAnimator.setDuration(duration);
+        objectAnimator.start();
+    }
 
     /**
      * 更新选中的和未选中的样式
@@ -245,10 +294,18 @@ public class TabLayout extends LinearLayout {
                     TextUtils.isEmpty(mBottomTab.getTabUnSelectUrl())){
                 mTabIcon.setImageResource(isSelect ?mBottomTab.getTabSelectIcon(): mBottomTab.getTabUnSelectIcon());
             }else{
-                Glide.with(mContext).load(isSelect?mBottomTab.getTabSelectUrl():mBottomTab.getTabUnSelectUrl()).
-                        diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(isSelect?mBottomTab.getTabSelectIcon():mBottomTab.getTabUnSelectIcon())
-                        .into(mTabIcon);
+//                Glide.with(mContext).load(isSelect?mBottomTab.getTabSelectUrl():mBottomTab.getTabUnSelectUrl()).
+//                        diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .placeholder(isSelect?mBottomTab.getTabSelectIcon():mBottomTab.getTabUnSelectIcon())
+//                        .into(mTabIcon);
+
+                if(mOnSetTabNetworkIconListener!=null){
+                    mOnSetTabNetworkIconListener.setTabNetworkIcon(mTabIcon,
+                            isSelect?mBottomTab.getTabSelectIcon():mBottomTab.getTabUnSelectIcon(),
+                            isSelect?mBottomTab.getTabSelectUrl():mBottomTab.getTabUnSelectUrl(),
+                            index,
+                            isSelect);
+                }
             }
         }
     }
@@ -272,5 +329,25 @@ public class TabLayout extends LinearLayout {
         void onTabSelected(int position);
     }
 
+    /**
+     * 设置网络图片回调
+     */
+    public OnSetTabNetworkIconListener mOnSetTabNetworkIconListener;
+    public void setOnSetTabIconListener(OnSetTabNetworkIconListener mOnSetTabNetworkIconListener){
+        this.mOnSetTabNetworkIconListener=mOnSetTabNetworkIconListener;
+    }
+
+
+    public interface OnSetTabNetworkIconListener {
+        /**
+         * 设置网络icon
+         * @param mTabIcon     tabview
+         * @param defaultIcon  默认的icon
+         * @param iconUrl      网络图片的url
+         * @param position     tab的index
+         * @param isSelect     是否选中状态
+         */
+        void setTabNetworkIcon(ImageView mTabIcon,int defaultIcon,String iconUrl,int position,boolean isSelect);
+    }
 
 }

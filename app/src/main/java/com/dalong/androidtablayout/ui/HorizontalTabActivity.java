@@ -7,7 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dalong.androidtablayout.R;
 import com.dalong.androidtablayout.ui.fragment.TabFourFragment;
 import com.dalong.androidtablayout.ui.fragment.TabOneFragment;
@@ -110,6 +113,16 @@ public class HorizontalTabActivity extends AppCompatActivity {
                 Log.v(TAG, "您已经选择了"+position);
             }
         });
+        mTabLayout.setOnSetTabIconListener(new TabLayout.OnSetTabNetworkIconListener() {
+            @Override
+            public void setTabNetworkIcon(ImageView mTabIcon, int defaultIcon, String iconUrl, int position, boolean isSelect) {
+                Glide.with(HorizontalTabActivity.this)
+                        .load(iconUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(defaultIcon)
+                        .into(mTabIcon);
+            }
+        });
     }
 
     private void initData() {
@@ -119,6 +132,7 @@ public class HorizontalTabActivity extends AppCompatActivity {
         fragmentsList.add(new TabFourFragment());
         mHorViewpager.setAdapter(new GuideAdapter(getSupportFragmentManager(), fragmentsList));
         mTabLayout.setViewPager(mHorViewpager);
+        initData(false);
     }
 
     public class GuideAdapter extends FragmentPagerAdapter {
@@ -186,5 +200,19 @@ public class HorizontalTabActivity extends AppCompatActivity {
      */
     public void onClearTabNum(){
         mTabLayout.clearAllTabNum();
+    }
+
+    /**
+     * 显示
+     */
+    public void onShow(){
+        mTabLayout.showTab();
+    }
+
+    /**
+     * 隐藏
+     */
+    public void onHide(){
+        mTabLayout.hideTab();
     }
 }

@@ -27,6 +27,8 @@ public class TabOneFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.onTabNum).setOnClickListener(this);
         view.findViewById(R.id.onNetIcon).setOnClickListener(this);
         view.findViewById(R.id.onLocalIcon).setOnClickListener(this);
+        view.findViewById(R.id.onShow).setOnClickListener(this);
+        view.findViewById(R.id.onHide).setOnClickListener(this);
     }
 
     @Override
@@ -44,8 +46,33 @@ public class TabOneFragment extends Fragment implements View.OnClickListener {
             case R.id.onClearTabNum:
                 onClearTabNum(v);
                 break;
+            case R.id.onShow:
+                onShow(v);
+                break;
+            case R.id.onHide:
+                onHide(v);
+                break;
         }
 
+    }
+
+    public void onShow(View v) {
+        if(getActivity() instanceof HorizontalTabActivity){
+            HorizontalTabActivity horizontalTabActivity= (HorizontalTabActivity) getActivity();
+            horizontalTabActivity.onShow();
+        }else if(getActivity() instanceof VerticalTabActivity){
+            VerticalTabActivity verticalTabActivity= (VerticalTabActivity) getActivity();
+            verticalTabActivity.onShow();
+        }
+    }
+    public void onHide(View v) {
+        if(getActivity() instanceof HorizontalTabActivity){
+            HorizontalTabActivity horizontalTabActivity= (HorizontalTabActivity) getActivity();
+            horizontalTabActivity.onHide();
+        }else if(getActivity() instanceof VerticalTabActivity){
+            VerticalTabActivity verticalTabActivity= (VerticalTabActivity) getActivity();
+            verticalTabActivity.onHide();
+        }
     }
 
     /**

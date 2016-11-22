@@ -4,10 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
+        android:id="@+id/onShow"
+        android:text="显示tab"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/onHide"
+        android:text="隐藏tab"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
         android:id="@+id/onLocalIcon"
         android:text="使用本地图片"
         android:textSize="20sp"
-        android:padding="30dp"
+        android:padding="10dp"
         android:onClick="onLocalIcon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -16,7 +30,7 @@
         android:id="@+id/onNetIcon"
         android:text="使用网络图片"
         android:onClick="onNetIcon"
-        android:padding="30dp"
+        android:padding="10dp"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -24,7 +38,7 @@
         android:id="@+id/onTabNum"
         android:text="设置小红点"
         android:onClick="onTabNum"
-        android:padding="30dp"
+        android:padding="10dp"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -32,7 +46,7 @@
     <Button
         android:id="@+id/onClearTabNum"
         android:text="清除小红点"
-        android:padding="30dp"
+        android:padding="10dp"
         android:textSize="20sp"
         android:onClick="onClearTabNum"
         android:layout_width="match_parent"
